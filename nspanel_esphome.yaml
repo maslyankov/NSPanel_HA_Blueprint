@@ -84,7 +84,7 @@ ota:
   num_attempts: 3
 
 ##### LOGGER #####
-logger:
+# logger:
 #  baud_rate: 0
 #  level: WARN
 
@@ -372,22 +372,23 @@ binary_sensor:
       number: 14
       inverted: true
     on_click:
-      then:
-        - if:
-            condition:
-              and:
-                  - switch.is_on: relay1_fallback
-                  - not:
-                      api.connected:
-            then:
-              - switch.toggle: relay_1
-              - lambda: id(disp1).send_command_printf("home.icon_top_01.pic=51");
-              - lambda: id(disp1).send_command_printf("home.left_bt_pic.pic=98");
-              - if: 
-                  condition:
-                    switch.is_on: relay_1
-                  then:
-                    - lambda: id(disp1).send_command_printf("home.icon_top_01.pic=105");
+      - lambda: 'id(disp1)->upload_tft();'
+#       then:
+#         - if:
+#             condition:
+#               and:
+#                   - switch.is_on: relay1_fallback
+#                   - not:
+#                       api.connected:
+#             then:
+#               - switch.toggle: relay_1
+#               - lambda: id(disp1).send_command_printf("home.icon_top_01.pic=51");
+#               - lambda: id(disp1).send_command_printf("home.left_bt_pic.pic=98");
+#               - if: 
+#                   condition:
+#                     switch.is_on: relay_1
+#                   then:
+#                     - lambda: id(disp1).send_command_printf("home.icon_top_01.pic=105");
 
 
   ##### RIGHT BUTTON BELOW DISPLAY TO TOGGLE RELAY #####
