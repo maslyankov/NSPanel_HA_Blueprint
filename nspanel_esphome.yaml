@@ -30,10 +30,7 @@
 # <<: !include .nspanel_esphome.yaml
 
 ##### END OF ADVANCED CONFIGURATION ##############################################################
-on_boot:
-  priority: 601
-  then:
-    - lambda: id(disp1).send_command_printf("DRAKJHSUYDGBNCJHGJKSHBDN");
+
 ##### WIFI SETUP #####
 wifi:
   ssid: ${wifi_ssid}
@@ -62,6 +59,10 @@ external_components:
 esphome:
   name: ${device_name}
   min_version: 2022.10.2
+  on_boot:
+    priority: 601
+    then:
+      - lambda: id(disp1).send_command_printf("DRAKJHSUYDGBNCJHGJKSHBDN");
 
 ##### TYPE OF ESP BOARD #####
 esp32:
